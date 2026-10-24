@@ -55,7 +55,11 @@ const products = [
 ];
 
 let cart = [];
-let currentFilter = 'semua';
+
+// Format Rupiah
+const formatRupiah = (number) => {
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+};
 
 // Render Products
 const productGrid = document.getElementById('product-grid');
@@ -67,10 +71,9 @@ function renderProducts() {
     const regularItems = products.filter(p => p.category === 'reguler');
 
     // 1 Spotlight Produk Premium
-    if (premiumSpotlight) {
-        if (currentFilter === 'semua' || currentFilter === 'premium') {
-            premiumSpotlight.style.display = 'block';
-            premiumSpotlight.innerHTML = `
+    if (premiumSpotlight && premiumItem) {
+        premiumSpotlight.style.display = 'block';
+        premiumSpotlight.innerHTML = `
                 <div class="relative bg-secondary/60 border-2 border-primary/40 rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                     <div class="absolute -top-3.5 left-6 sm:left-8 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-extrabold uppercase tracking-wider py-1.5 px-4 rounded-full shadow-md flex items-center gap-1.5">
                         <i class="fas fa-crown text-amber-200"></i>
@@ -108,60 +111,31 @@ function renderProducts() {
                     </div>
                 </div>
             `;
-        } else {
-            premiumSpotlight.style.display = 'none';
-        }
     }
-
-
-// Format Rupiah
-const formatRupiah = (number) => {
-    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
-};
 
     // 4 Produk Reguler
     if (productGrid) {
-        if (currentFilter === 'semua' || currentFilter === 'reguler') {
-            productGrid.style.display = 'grid';
-            if (regularHeading) regularHeading.style.display = (currentFilter === 'semua') ? 'flex' : 'none';
+        productGrid.style.display = 'grid';
+        if (regularHeading) regularHeading.style.display = 'flex';
 
-            productGrid.innerHTML = regularItems.map(p => `
-                <div class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col">
-                    <div class="relative overflow-hidden">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <h3 class="text-lg font-bold text-stone-800 mb-1 leading-snug">${p.name}</h3>
-                        <p class="text-sm text-stone-500 mb-4 h-12 leading-relaxed line-clamp-2">${p.desc}</p>
-                        <div class="flex justify-between items-center mt-auto pt-2 border-t border-stone-100">
-                            <span class="text-primary font-bold text-lg">${formatRupiah(p.price)}</span>
-                            <button onclick="addToCart(${p.id})" class="w-10 h-10 rounded-full bg-secondary text-primary hover:bg-primary hover:text-white flex items-center justify-center transition-colors shadow-sm" aria-label="Tambah ${p.name}">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+        productGrid.innerHTML = regularItems.map(p => `
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col">
+                <div class="relative overflow-hidden">
+                    <img src="${p.img}" alt="${p.name}" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="text-lg font-bold text-stone-800 mb-1 leading-snug">${p.name}</h3>
+                    <p class="text-sm text-stone-500 mb-4 h-12 leading-relaxed line-clamp-2">${p.desc}</p>
+                    <div class="flex justify-between items-center mt-auto pt-2 border-t border-stone-100">
+                        <span class="text-primary font-bold text-lg">${formatRupiah(p.price)}</span>
+                        <button onclick="addToCart(${p.id})" class="w-10 h-10 rounded-full bg-secondary text-primary hover:bg-primary hover:text-white flex items-center justify-center transition-colors shadow-sm" aria-label="Tambah ${p.name}">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
-            `).join('');
-        } else {
-            productGrid.style.display = 'none';
-            if (regularHeading) regularHeading.style.display = 'none';
-        }
+            </div>
+        `).join('');
     }
-}
-
-function setFilter(filter) {
-    currentFilter = filter;
-    ['semua', 'reguler', 'premium'].forEach(f => {
-        const btn = document.getElementById(`filter-${f}`);
-        if (btn) {
-            if (f === filter) {
-                btn.className = "filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-primary text-white shadow-md";
-            } else {
-                btn.className = "filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-stone-100 text-stone-600 hover:bg-secondary hover:text-primary";
-            }
-        }
-    });
-    renderProducts();
 }
 
 // Cart Functions
