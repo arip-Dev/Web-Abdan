@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Kacang Gurih Nusantara - kacang asin renyah, gurih, berkualitas."
+    />
+    <title>Kacang Gurih Nusantara | Toko Kacang Asin Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/output.css" />
+    <style>
+      body {
+        font-family: "Poppins", system-ui, sans-serif;
+      }
+      body.no-scroll {
+        overflow: hidden;
+      }
+      :root {
+        --navbar-h: 72px;
+      }
+      section[id],
+      footer[id] {
+        scroll-margin-top: calc(var(--navbar-h) + 8px);
+      }
+      .p-emoji {
+        transition: transform 0.4s ease;
+        filter: drop-shadow(0 10px 14px rgba(69, 26, 3, 0.25));
+        display: block;
+      }
+      .product-card:hover .p-emoji {
+        transform: scale(1.15) rotate(-6deg);
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background: #ea580c;
+        transition: width 0.3s;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body class="bg-cream text-brown-900 leading-relaxed overflow-x-hidden">
+    <!-- NAVBAR -->
+    <header
+      id="navbar"
+      class="fixed top-0 inset-x-0 z-50 bg-cream-blur transition-all duration-300"
+    >
+      <div
+        class="max-w-6xl mx-auto px-5 flex items-center justify-between h-[72px]"
+      >
+        <a
+          href="#home"
+          class="flex items-center gap-2.5 font-extrabold text-xl text-brown-600"
+          aria-label="Kacang Gurih Nusantara"
+        >
+          <div
+            class="w-[42px] h-[42px] rounded-xl grid place-items-center text-2xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-[0_6px_14px_rgba(234,88,12,.3)]"
+          >
+            🥜
+          </div>
+          Kacang<span class="text-orange-600">Gurih</span>
+        </a>
+        <ul class="hidden md:flex gap-8 list-none">
+          <li>
+            <a
+              href="#home"
+              class="nav-link relative font-medium py-1 hover:text-orange-600 transition-colors"
+              >Beranda</a
+            >
+          </li>
+          <li>
+            <a
+              href="#produk"
+              class="nav-link relative font-medium py-1 hover:text-orange-600 transition-colors"
+              >Produk</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tentang"
+              class="nav-link relative font-medium py-1 hover:text-orange-600 transition-colors"
+              >Tentang</a
+            >
+          </li>
+          <li>
+            <a
+              href="#testimoni"
+              class="nav-link relative font-medium py-1 hover:text-orange-600 transition-colors"
+              >Testimoni</a
+            >
+          </li>
+          <li>
+            <a
+              href="#kontak"
+              class="nav-link relative font-medium py-1 hover:text-orange-600 transition-colors"
+              >Kontak</a
+            >
+          </li>
+        </ul>
+        <div class="flex items-center gap-3">
+          <a href="#produk" class="btn-primary hidden md:inline-flex"
+            >Belanja Sekarang</a
+          >
+          <button
+            id="cartBtn"
+            aria-label="Buka keranjang"
+            class="relative w-[46px] h-[46px] rounded-full bg-white grid place-items-center text-xl shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md"
+          >
+            🛒
+            <span
+              id="cartCount"
+              class="absolute -top-1 -right-1 min-w-[22px] h-[22px] px-1.5 rounded-full bg-orange-600 text-white text-[.72rem] font-bold grid place-items-center border-2 border-cream"
+              >0</span
+            >
+          </button>
+          <button
+            id="menuToggle"
+            aria-label="Buka menu"
+            class="md:hidden w-[46px] h-[46px] grid place-items-center text-2xl text-brown-600"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+      <ul
+        id="mobileMenu"
+        class="md:hidden list-none overflow-hidden max-h-0 transition-[max-height] duration-300 ease-in-out bg-white shadow-md"
+      >
+        <li class="border-b border-amber-50">
+          <a
+            href="#home"
+            class="block px-6 py-4 font-medium hover:text-orange-600"
+            >Beranda</a
+          >
+        </li>
+        <li class="border-b border-amber-50">
+          <a
+            href="#produk"
+            class="block px-6 py-4 font-medium hover:text-orange-600"
+            >Produk</a
+          >
+        </li>
+        <li class="border-b border-amber-50">
+          <a
+            href="#tentang"
+            class="block px-6 py-4 font-medium hover:text-orange-600"
+            >Tentang</a
+          >
+        </li>
+        <li class="border-b border-amber-50">
+          <a
+            href="#testimoni"
+            class="block px-6 py-4 font-medium hover:text-orange-600"
+            >Testimoni</a
+          >
+        </li>
+        <li>
+          <a
+            href="#kontak"
+            class="block px-6 py-4 font-medium hover:text-orange-600"
+            >Kontak</a
+          >
+        </li>
+      </ul>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero-bg relative overflow-hidden">
+      <div
+        class="w-full max-w-6xl mx-auto px-5 py-6 grid md:grid-cols-[1.1fr_1fr] gap-12 items-center"
+      >
+        <div>
+          <div
+            class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-amber-200 text-brown-600 font-semibold text-sm mb-5"
+          >
+            🔥 Camilan Favorit Keluarga Indonesia
+          </div>
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-brown-800 mb-5"
+          >
+            Kacang Asin<br /><span class="text-gradient"
+              >Gurih &amp; Renyah</span
+            ><br />di Setiap Gigitan
+          </h1>
+          <p class="text-muted text-base md:text-lg mb-8 max-w-lg">
+            Dibuat dari kacang tanah pilihan, disangrai dengan resep
+            tradisional. Tanpa pengawet &mdash; nikmat untuk teman santai,
+            nonton, maupun hantaran.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#produk" class="btn-primary">🛍️ Lihat Produk</a>
+            <a href="#tentang" class="btn-outline">Tentang Kami</a>
+          </div>
+          <div class="flex flex-wrap gap-9 mt-12">
+            <div>
+              <p class="text-3xl font-extrabold text-orange-600">10K+</p>
+              <p class="text-sm text-muted">Pelanggan Puas</p>
+            </div>
+            <div>
+              <p class="text-3xl font-extrabold text-orange-600">4.9 ★</p>
+              <p class="text-sm text-muted">Rating Produk</p>
+            </div>
+            <div>
+              <p class="text-3xl font-extrabold text-orange-600">100%</p>
+              <p class="text-sm text-muted">Bahan Alami</p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="relative grid place-items-center order-first md:order-last mb-8 md:mb-0"
+        >
+          <div
+            class="relative w-[min(340px,78vw)] aspect-square rounded-full bg-gradient-to-br from-amber-500 to-orange-600 grid place-items-center shadow-[0_20px_50px_rgba(120,53,15,.2)] border-spin animate-float"
+          >
+            <span class="text-[min(9rem,20vw)] leading-none">🥜</span>
+          </div>
+          <div
+            class="animate-float-sm absolute top-[8%] left-0 bg-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2.5 text-sm font-semibold text-brown-600"
+          >
+            <span class="text-2xl">🚚</span>
+            <div>
+              Gratis Ongkir<small
+                class="block font-normal text-muted text-[11px]"
+                >Min. Rp100rb</small
+              >
+            </div>
+          </div>
+          <div
+            class="animate-float-rev absolute bottom-[10%] right-0 bg-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2.5 text-sm font-semibold text-brown-600"
+          >
+            <span class="text-2xl">⭐</span>
+            <div>
+              Best Seller<small class="block font-normal text-muted text-[11px]"
+                >Terjual 5.000+ pack</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEUNGGULAN -->
+    <section class="py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-xl mx-auto mb-14">
+          <span
+            class="text-orange-600 font-bold uppercase tracking-widest text-xs"
+            >Kenapa Memilih Kami</span
+          >
+          <h2
+            class="text-3xl md:text-4xl font-extrabold text-brown-800 mt-2 mb-3"
+          >
+            Kualitas Terbaik untuk Camilan Anda
+          </h2>
+          <p class="text-muted">
+            Kami berkomitmen menghadirkan kacang asin berkualitas tinggi dengan
+            cita rasa konsisten.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="feature-card">
+            <div
+              class="w-[72px] h-[72px] mx-auto mb-5 rounded-[20px] grid place-items-center text-3xl bg-gradient-to-br from-amber-200 to-amber-400"
+            >
+              🌱
+            </div>
+            <h3 class="text-brown-600 font-semibold text-base mb-2">
+              Bahan Pilihan
+            </h3>
+            <p class="text-muted text-sm">
+              Kacang tanah grade A dari petani lokal terpercaya.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div
+              class="w-[72px] h-[72px] mx-auto mb-5 rounded-[20px] grid place-items-center text-3xl bg-gradient-to-br from-amber-200 to-amber-400"
+            >
+              🔥
+            </div>
+            <h3 class="text-brown-600 font-semibold text-base mb-2">
+              Sangrai Sempurna
+            </h3>
+            <p class="text-muted text-sm">
+              Proses sangrai tradisional menghasilkan tekstur super renyah.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div
+              class="w-[72px] h-[72px] mx-auto mb-5 rounded-[20px] grid place-items-center text-3xl bg-gradient-to-br from-amber-200 to-amber-400"
+            >
+              🛡️
+            </div>
+            <h3 class="text-brown-600 font-semibold text-base mb-2">
+              Higienis &amp; Halal
+            </h3>
+            <p class="text-muted text-sm">
+              Diproduksi secara bersih dan higienis setiap hari.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div
+              class="w-[72px] h-[72px] mx-auto mb-5 rounded-[20px] grid place-items-center text-3xl bg-gradient-to-br from-amber-200 to-amber-400"
+            >
+              📦
+            </div>
+            <h3 class="text-brown-600 font-semibold text-base mb-2">
+              Kemasan Aman
+            </h3>
+            <p class="text-muted text-sm">
+              Kemasan zip-lock kedap udara, renyah lebih lama.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUK -->
+    <section id="produk" class="py-24 bg-cream">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-xl mx-auto mb-14">
+          <span
+            class="text-orange-600 font-bold uppercase tracking-widest text-xs"
+            >Produk Kami</span
+          >
+          <h2
+            class="text-3xl md:text-4xl font-extrabold text-brown-800 mt-2 mb-3"
+          >
+            Pilih Kacang Asin Favoritmu
+          </h2>
+          <p class="text-muted">
+            Tersedia 4 varian rasa reguler renyah dan 1 edisi spesial hampers premium eksklusif.
+          </p>
+        </div>
+        <div id="filterBar" class="flex flex-wrap justify-center gap-3 mb-10">
+          <button class="filter-btn active" data-filter="semua">Semua Produk (5)</button>
+          <button class="filter-btn" data-filter="reguler">Varian Reguler (4)</button>
+          <button class="filter-btn" data-filter="premium">👑 Edisi Premium (1)</button>
+        </div>
+        <div id="productsGrid"></div>
+      </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section
+      id="tentang"
+      class="py-20 relative overflow-hidden bg-gradient-to-br from-brown-600 to-brown-800 text-amber-50 about-decor"
+    >
+      <div
+        class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-16 items-center relative"
+      >
+        <div>
+          <span
+            class="text-amber-400 font-bold uppercase tracking-widest text-xs"
+            >Tentang Kami</span
+          >
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-2 mb-5">
+            Resep Warisan Keluarga Sejak 1998
+          </h2>
+          <p class="text-brown-100 mb-4">
+            Kacang Gurih Nusantara berawal dari dapur rumahan sederhana. Resep
+            bumbu kami diwariskan turun-temurun dan tetap kami jaga keasliannya
+            hingga hari ini.
+          </p>
+          <p class="text-brown-100 mb-4">
+            Setiap butir kacang diseleksi, direndam bumbu rempah, lalu disangrai
+            perlahan agar matang merata dan tetap renyah setelah dikemas.
+          </p>
+          <p class="text-brown-100 mb-8">
+            Kami percaya bahwa camilan lezat tidak harus mahal. Itulah mengapa
+            kami terus berkomitmen menjaga kualitas dengan harga yang
+            terjangkau.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3">
+              <span
+                class="w-6 h-6 rounded-full bg-amber-400 grid place-items-center text-brown-800 font-bold text-sm flex-shrink-0"
+                >✓</span
+              >
+              <span>Tanpa pengawet buatan</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="w-6 h-6 rounded-full bg-amber-400 grid place-items-center text-brown-800 font-bold text-sm flex-shrink-0"
+                >✓</span
+              >
+              <span>Bahan baku lokal pilihan</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="w-6 h-6 rounded-full bg-amber-400 grid place-items-center text-brown-800 font-bold text-sm flex-shrink-0"
+                >✓</span
+              >
+              <span>Proses produksi higienis bersertifikat</span>
+            </li>
+          </ul>
+        </div>
+        <div class="grid grid-cols-2 gap-5">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+            <div class="text-4xl mb-2">🏆</div>
+            <p class="font-extrabold text-2xl text-white">15+</p>
+            <p class="text-brown-100 text-sm">Tahun Pengalaman</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+            <div class="text-4xl mb-2">👨‍🌾</div>
+            <p class="font-extrabold text-2xl text-white">8</p>
+            <p class="text-brown-100 text-sm">Varian Produk</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+            <div class="text-4xl mb-2">🏙️</div>
+            <p class="font-extrabold text-2xl text-white">20+</p>
+            <p class="text-brown-100 text-sm">Kota Pengiriman</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+            <div class="text-4xl mb-2">📦</div>
+            <p class="font-extrabold text-2xl text-white">10K+</p>
+            <p class="text-brown-100 text-sm">Paket Terkirim</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section id="testimoni" class="py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-xl mx-auto mb-14">
+          <span
+            class="text-orange-600 font-bold uppercase tracking-widest text-xs"
+            >Testimoni</span
+          >
+          <h2
+            class="text-3xl md:text-4xl font-extrabold text-brown-800 mt-2 mb-3"
+          >
+            Apa Kata Pelanggan Kami
+          </h2>
+          <p class="text-muted">
+            Ribuan pelanggan puas telah merasakan kegurihannya.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-7">
+          <div class="testi-card">
+            <div class="text-amber-400 mb-3 tracking-widest">★★★★★</div>
+            <p class="text-muted italic mb-5 text-sm">
+              &ldquo;Kacangnya beneran renyah dan bumbunya meresap. Udah jadi
+              camilan wajib di rumah setiap minggu!&rdquo;
+            </p>
+            <div class="flex items-center gap-3">
+              <div
+                class="w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 grid place-items-center text-white font-bold flex-shrink-0"
+              >
+                SR
+              </div>
+              <div>
+                <p class="text-brown-600 font-semibold text-sm">Siti Rahayu</p>
+                <span class="text-muted text-xs">Jakarta</span>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="text-amber-400 mb-3 tracking-widest">★★★★★</div>
+            <p class="text-muted italic mb-5 text-sm">
+              &ldquo;Pesan paket hemat untuk acara arisan, semua tamu suka.
+              Pengiriman cepat dan kemasannya rapi.&rdquo;
+            </p>
+            <div class="flex items-center gap-3">
+              <div
+                class="w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 grid place-items-center text-white font-bold flex-shrink-0"
+              >
+                BS
+              </div>
+              <div>
+                <p class="text-brown-600 font-semibold text-sm">Budi Santoso</p>
+                <span class="text-muted text-xs">Surabaya</span>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="text-amber-400 mb-3 tracking-widest">★★★★★</div>
+            <p class="text-muted italic mb-5 text-sm">
+              &ldquo;Varian pedas daun jeruknya juara! Teman paling pas buat
+              nonton bola bareng teman-teman.&rdquo;
+            </p>
+            <div class="flex items-center gap-3">
+              <div
+                class="w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 grid place-items-center text-white font-bold flex-shrink-0"
+              >
+                DP
+              </div>
+              <div>
+                <p class="text-brown-600 font-semibold text-sm">
+                  Dimas Pratama
+                </p>
+                <span class="text-muted text-xs">Bandung</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="pb-24 bg-cream">
+      <div class="max-w-6xl mx-auto px-5">
+        <div
+          class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-[1.5rem] p-16 text-center text-white shadow-[0_20px_50px_rgba(120,53,15,.2)]"
+        >
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-3">
+            🎉 Gratis Ongkir untuk Belanja Minimal Rp100.000!
+          </h2>
+          <p class="opacity-95 mb-8 text-lg">
+            Jangan sampai kehabisan stok camilan favoritmu. Pesan sekarang dan
+            nikmati kegurihannya.
+          </p>
+          <a
+            href="#produk"
+            class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold bg-white text-orange-600 transition-all duration-300 hover:bg-brown-800 hover:text-white hover:-translate-y-1"
+            >Pesan Sekarang &rarr;</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="kontak" class="bg-brown-800 text-amber-100 pt-16 pb-6">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          <div>
+            <a
+              href="#home"
+              class="flex items-center gap-2.5 font-extrabold text-xl text-white mb-4"
+            >
+              <div
+                class="w-[38px] h-[38px] rounded-xl grid place-items-center text-xl bg-gradient-to-br from-amber-500 to-orange-600"
+              >
+                🥜
+              </div>
+              Kacang<span class="text-amber-400">Gurih</span>
+            </a>
+            <p class="text-sm text-brown-100">
+              Camilan kacang asin tradisional berkualitas, gurih, renyah, dibuat
+              dengan sepenuh hati untuk keluarga Indonesia.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-amber-400 font-semibold mb-4">Menu</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#home"
+                  class="text-brown-100 hover:text-amber-400 transition-colors"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#produk"
+                  class="text-brown-100 hover:text-amber-400 transition-colors"
+                  >Produk</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#tentang"
+                  class="text-brown-100 hover:text-amber-400 transition-colors"
+                  >Tentang Kami</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#testimoni"
+                  class="text-brown-100 hover:text-amber-400 transition-colors"
+                  >Testimoni</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-amber-400 font-semibold mb-4">Jam Operasional</h4>
+            <ul class="space-y-2 text-sm text-brown-100">
+              <li>Senin &ndash; Jumat: 08.00 &ndash; 20.00</li>
+              <li>Sabtu: 08.00 &ndash; 17.00</li>
+              <li>Minggu: Libur</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-amber-400 font-semibold mb-4">Hubungi Kami</h4>
+            <ul class="space-y-2 text-sm text-brown-100">
+              <li>📍 Jl. Kacang Gurih No. 12, Yogyakarta</li>
+              <li>📞 0812-3456-7890</li>
+              <li>✉️ halo@kacanggurih.id</li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="border-t border-amber-200/15 pt-6 text-center text-sm text-brown-100"
+        >
+          &copy; <span id="year"></span> Kacang Gurih Nusantara. Dibuat dengan
+          🧡 untuk pecinta camilan.
+        </div>
+      </div>
+    </footer>
+
+    <!-- OVERLAY -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-brown-800/50 backdrop-blur-sm z-[200] opacity-0 invisible transition-all duration-300"
+    ></div>
+
+    <!-- CART SIDEBAR -->
+    <aside
+      id="cartSidebar"
+      aria-label="Keranjang belanja"
+      class="fixed top-0 right-0 h-full w-[420px] max-w-full bg-white z-[300] flex flex-col translate-x-full transition-transform duration-400 ease-[cubic-bezier(.77,0,.175,1)] shadow-[-10px_0_40px_rgba(69,26,3,.2)]"
+    >
+      <div
+        class="flex items-center justify-between px-6 py-5 bg-amber-50 border-b border-amber-100"
+      >
+        <h3 class="font-extrabold text-brown-800 text-lg">
+          🛒 Keranjang Belanja
+        </h3>
+        <button
+          id="closeCart"
+          aria-label="Tutup keranjang"
+          class="w-9 h-9 rounded-full bg-white shadow-sm grid place-items-center transition-all duration-300 hover:bg-orange-600 hover:text-white hover:rotate-90"
+        >
+          &times;
+        </button>
+      </div>
+      <div
+        id="cartItems"
+        class="flex-1 overflow-y-auto px-6 py-4 scrollbar-thin"
+      ></div>
+      <div
+        id="cartFooter"
+        class="px-6 py-5 border-t border-amber-100 bg-white"
+        style="display: none"
+      >
+        <div
+          id="freeShipNote"
+          class="text-xs bg-amber-50 text-brown-600 px-3 py-2 rounded-xl mb-3 text-center"
+        ></div>
+        <div class="flex justify-between text-sm text-muted mb-2">
+          <span>Subtotal (<span id="totalQty">0</span> item)</span
+          ><span id="subtotal">Rp0</span>
+        </div>
+        <div class="flex justify-between text-sm text-muted mb-2">
+          <span>Ongkos Kirim</span><span id="shipping">Rp0</span>
+        </div>
+        <div
+          class="flex justify-between font-extrabold text-brown-800 text-lg border-t border-dashed border-amber-200 pt-3 mt-3 mb-4"
+        >
+          <span>Total</span
+          ><span id="grandTotal" class="text-orange-600">Rp0</span>
+        </div>
+        <button id="checkoutBtn" class="btn-primary w-full">
+          Checkout Sekarang &rarr;
+        </button>
+        <button
+          id="clearCart"
+          class="block w-fit mx-auto mt-3 text-xs text-muted underline hover:text-red-500 transition-colors"
+        >
+          Kosongkan keranjang
+        </button>
+      </div>
+    </aside>
+    <!-- MODAL CHECKOUT -->
+    <div
+      id="checkoutModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="checkoutTitle"
+      class="fixed inset-0 z-[400] grid place-items-center p-5 bg-brown-800/55 backdrop-blur-sm opacity-0 invisible transition-all duration-300"
+    >
+      <div
+        class="bg-white rounded-3xl w-full max-w-xl max-h-[92vh] overflow-y-auto scrollbar-thin shadow-2xl scale-90 translate-y-8 transition-all duration-300"
+      >
+        <div
+          class="sticky top-0 z-10 flex items-center justify-between px-7 py-5 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-t-3xl"
+        >
+          <div>
+            <h3 id="checkoutTitle" class="font-extrabold text-lg">
+              📝 Formulir Pemesanan
+            </h3>
+            <p class="text-xs opacity-90">
+              Lengkapi data untuk menyelesaikan pesanan
+            </p>
+          </div>
+          <button
+            id="closeModal"
+            aria-label="Tutup formulir"
+            class="w-9 h-9 rounded-full bg-white/25 grid place-items-center transition-all duration-300 hover:bg-white hover:text-orange-600 hover:rotate-90"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="px-7 py-6">
+          <div
+            id="orderSummary"
+            class="bg-amber-50 rounded-2xl p-4 mb-6 text-sm"
+          ></div>
+          <form id="checkoutForm" novalidate>
+            <div id="fg-custName" class="form-group mb-4">
+              <label
+                class="block font-semibold text-xs text-brown-600 mb-1.5"
+                for="custName"
+                >Nama Lengkap <span class="text-red-500">*</span></label
+              >
+              <input
+                id="custName"
+                type="text"
+                class="form-input"
+                placeholder="Contoh: Budi Santoso"
+              />
+              <p class="hidden text-red-500 text-[.76rem] mt-1 err-msg">
+                Nama minimal 3 karakter.
+              </p>
+            </div>
+            <div id="fg-custEmail" class="form-group mb-4">
+              <label
+                class="block font-semibold text-xs text-brown-600 mb-1.5"
+                for="custEmail"
+                >Email <small class="font-normal">(opsional)</small></label
+              >
+              <input
+                id="custEmail"
+                type="email"
+                class="form-input"
+                placeholder="Contoh: budi@email.com"
+              />
+              <p class="hidden text-red-500 text-[.76rem] mt-1 err-msg">
+                Format email tidak valid.
+              </p>
+            </div>
+            <div id="fg-custAddress" class="form-group mb-4">
+              <label
+                class="block font-semibold text-xs text-brown-600 mb-1.5"
+                for="custAddress"
+                >Alamat Lengkap <span class="text-red-500">*</span></label
+              >
+              <textarea
+                id="custAddress"
+                rows="3"
+                class="form-input resize-none"
+                placeholder="Nama jalan, nomor, RT/RW, kelurahan, kecamatan, kota, kode pos"
+              ></textarea>
+              <p class="hidden text-red-500 text-[.76rem] mt-1 err-msg">
+                Alamat minimal 10 karakter.
+              </p>
+            </div>
+            <div id="fg-payment" class="form-group mb-4">
+              <label class="block font-semibold text-xs text-brown-600 mb-2"
+                >Metode Pembayaran <span class="text-red-500">*</span></label
+              >
+              <div class="grid grid-cols-2 gap-3">
+                <div class="pay-option">
+                  <input
+                    type="radio"
+                    name="payment"
+                    id="payTransfer"
+                    value="Transfer Bank"
+                  /><label for="payTransfer"
+                    ><span class="text-2xl">🏦</span>Transfer Bank</label
+                  >
+                </div>
+                <div class="pay-option">
+                  <input
+                    type="radio"
+                    name="payment"
+                    id="payEwallet"
+                    value="E-Wallet"
+                  /><label for="payEwallet"
+                    ><span class="text-2xl">📱</span>E-Wallet</label
+                  >
+                </div>
+              </div>
+              <p class="hidden text-red-500 text-[.76rem] mt-1 err-msg">
+                Pilih metode pembayaran.
+              </p>
+            </div>
+            <div class="mb-6">
+              <label
+                class="block font-semibold text-xs text-brown-600 mb-1.5"
+                for="custNote"
+                >Catatan <small class="font-normal">(opsional)</small></label
+              >
+              <input
+                id="custNote"
+                type="text"
+                class="form-input"
+                placeholder="Contoh: Dikemas rapi untuk hadiah"
+              />
+            </div>
+            <button
+              type="submit"
+              id="submitOrder"
+              class="btn-primary w-full flex items-center justify-center gap-2"
+            >
+              <span>💬</span> Pesan via WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST + BACK TO TOP -->
+    <div
+      id="toastContainer"
+      aria-live="polite"
+      class="fixed top-[90px] right-5 z-[500] flex flex-col gap-3 pointer-events-none max-w-[calc(100%-40px)]"
+    ></div>
+    <button
+      id="backToTop"
+      aria-label="Kembali ke atas"
+      class="fixed bottom-6 right-6 w-12 h-12 rounded-full z-[90] bg-gradient-to-br from-amber-500 to-orange-600 text-white text-xl shadow-[0_8px_20px_rgba(234,88,12,.35)] grid place-items-center opacity-0 invisible translate-y-5 transition-all duration-300 hover:-translate-y-1"
+    >
+      &uarr;
+    </button>
+
+    <!-- SCRIPTS: data > toast > products > cart > checkout > ui -->
+    <script src="js/data.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/ui.js"></script>
+  </body>
+</html>

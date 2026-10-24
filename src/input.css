@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════
+   TAILWIND v4 – TEMA & TOKEN DESAIN
+═══════════════════════════════════════ */
+@theme {
+  --color-amber-50:   #fffbeb;
+  --color-amber-100:  #fef3c7;
+  --color-amber-200:  #fde68a;
+  --color-amber-300:  #fcd34d;
+  --color-amber-500:  #f59e0b;
+  --color-amber-600:  #d97706;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-brown-50:   #fff7e6;
+  --color-brown-100:  #f5dcc0;
+  --color-brown-600:  #78350f;
+  --color-brown-800:  #451a03;
+  --color-brown-900:  #3b2410;
+  --color-cream:      #fffbf2;
+  --color-muted:      #8a6a4a;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-14px); }
+  }
+  @keyframes spin-slow  { to { transform: rotate(360deg); } }
+  @keyframes fade-up    { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes slide-in   { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes bump       { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.4); } }
+  @keyframes toast-in   { from { opacity:0; transform:translateX(110%); } to { opacity:1; transform:translateX(0); } }
+  @keyframes toast-out  { to { opacity:0; transform:translateX(110%); } }
+  @keyframes bar-shrink { from { width:100%; } to { width:0; } }
+}
+
+/* ═══════════════════════════════════════
+   UTILITAS KUSTOM
+═══════════════════════════════════════ */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg,#f59e0b,#ea580c);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-bg {
+    background:
+      radial-gradient(circle at 85% 20%,rgba(253,230,138,.7),transparent 45%),
+      radial-gradient(circle at 10% 90%,rgba(251,146,60,.25),transparent 40%),
+      #fffbf2;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: var(--navbar-h);
+    padding-bottom: 2.5rem;
+  }
+  .bg-cream-blur  { background:rgba(255,251,242,.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+  .bg-cream-solid { background:rgba(255,251,242,.97); }
+  .border-spin::before {
+    content:''; position:absolute; inset:-18px; border-radius:50%;
+    border:3px dashed rgba(234,88,12,.35); animation:spin-slow 30s linear infinite;
+  }
+  .scrollbar-thin {
+    scrollbar-width:thin; scrollbar-color:#fcd34d transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar       { width:6px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background:transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background:#fcd34d; border-radius:99px; }
+  .before-quote::before {
+    content:'\201C'; position:absolute; top:4px; right:22px; font-size:5rem;
+    color:#fde68a; font-family:Georgia,serif; line-height:1;
+  }
+  .about-decor::before {
+    content:'🥜'; position:absolute; font-size:22rem; opacity:.05; right:-60px; top:-60px; transform:rotate(20deg);
+  }
+  .animate-float     { animation: float 5s ease-in-out infinite; }
+  .animate-float-rev { animation: float 4.5s ease-in-out infinite reverse; }
+  .animate-float-sm  { animation: float 4s ease-in-out infinite; }
+  .animate-fade-up   { animation: fade-up .5s ease both; }
+  .animate-slide-in  { animation: slide-in .3s ease; }
+  .animate-bump      { animation: bump .4s ease; }
+  .animate-toast-in  { animation: toast-in .4s cubic-bezier(.21,1.02,.73,1) forwards; }
+  .animate-toast-out { animation: toast-out .35s ease forwards; }
+  .bar-shrink        { animation: bar-shrink linear forwards; }
+}
+/* ═══════════════════════════════════════
+   KOMPONEN REUSABLE (Tailwind @apply)
+═══════════════════════════════════════ */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-[13px] rounded-full
+           font-semibold text-sm text-white transition-all duration-300
+           bg-gradient-to-br from-amber-500 to-orange-600
+           shadow-[0_8px_20px_rgba(234,88,12,.35)]
+           hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(234,88,12,.45)];
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-[13px] rounded-full
+           font-semibold text-sm border-2 border-brown-600 text-brown-600
+           transition-all duration-300 hover:bg-brown-600 hover:text-white;
+  }
+  .form-input {
+    @apply w-full px-4 py-3 border-2 border-amber-100 rounded-xl
+           text-sm text-brown-900 bg-cream outline-none transition-all duration-300
+           focus:border-amber-500 focus:bg-white
+           focus:shadow-[0_0_0_4px_rgba(245,158,11,.15)];
+  }
+  .form-input.invalid { @apply border-red-500 bg-red-50; }
+  .feature-card {
+    @apply text-center p-9 rounded-[1.125rem] bg-amber-50 border border-transparent
+           transition-all duration-300
+           hover:-translate-y-2 hover:shadow-xl hover:border-amber-200 hover:bg-white;
+  }
+  .filter-btn {
+    @apply px-5 py-2.5 rounded-full bg-white text-brown-600 font-medium shadow-sm
+           text-sm transition-all duration-300 hover:text-orange-600;
+  }
+  .filter-btn.active {
+    @apply bg-gradient-to-r from-amber-500 to-orange-600 text-white;
+  }
+  .product-card {
+    @apply bg-white rounded-[1.125rem] overflow-hidden shadow-sm flex flex-col
+           transition-all duration-300
+           hover:-translate-y-2 hover:shadow-2xl;
+  }
+  .add-to-cart-btn {
+    @apply inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full
+           bg-brown-600 text-white font-semibold text-[.85rem]
+           transition-all duration-300 hover:bg-orange-600 hover:scale-105;
+  }
+  .add-to-cart-btn.added { @apply bg-green-600; }
+  .testi-card {
+    @apply relative bg-white p-8 rounded-[1.125rem] shadow-sm
+           transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5;
+  }
+  .pay-option input { @apply sr-only; }
+  .pay-option label {
+    @apply flex flex-col items-center gap-1 p-3 border-2 border-amber-100 rounded-xl
+           cursor-pointer text-[.8rem] bg-cream font-semibold
+           transition-all duration-300 hover:border-amber-500;
+  }
+  .pay-option input:checked + label {
+    @apply border-orange-600 bg-amber-50 text-orange-700
+           shadow-[0_4px_12px_rgba(234,88,12,.18)];
+  }
+}

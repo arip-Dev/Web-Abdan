@@ -1,0 +1,17 @@
+{
+  "name": "website-abdan",
+  "version": "1.0.0",
+  "description": "Toko Online Kacang Gurih Nusantara",
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "keywords": [],
+  "author": "Abdan",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
+
