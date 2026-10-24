@@ -4,53 +4,35 @@
 
 const WA_NUMBER = "6285183371170";
 
-// Data: 4 Varian Reguler + 1 Edisi Premium Eksklusif
+// Data Produk (4 Ukuran Kemasan)
 const products = [
     {
         id: 1,
-        name: 'Kacang Asin Original 250g',
-        category: 'reguler',
-        price: 18000,
-        desc: 'Kacang asin sangrai gurih dengan garam laut alami pilihan.',
-        img: 'https://placehold.co/400x400/d97706/ffffff?text=Original+250g'
+        name: 'Kacang Asin Kemasan 100g',
+        price: 12000,
+        desc: 'Cocok untuk nyemil sendiri sekali habis.',
+        img: 'Kacang 100gr.jpeg'
     },
     {
         id: 2,
-        name: 'Kacang Pedas Daun Jeruk 250g',
-        category: 'reguler',
-        price: 22000,
-        desc: 'Sensasi pedas cabai asli berpadu wangi daun jeruk segar.',
-        img: 'https://placehold.co/400x400/ea580c/ffffff?text=Pedas+Daun+Jeruk'
+        name: 'Kacang Asin Kemasan 250g',
+        price: 25000,
+        desc: 'Pas untuk menemani waktu nonton film.',
+        img: 'Kacang 250gr.jpeg'
     },
     {
         id: 3,
-        name: 'Kacang Bawang Gurih 250g',
-        category: 'reguler',
-        price: 24000,
-        desc: 'Kacang renyah berpadu taburan irisan bawang putih gurih harum.',
-        img: 'https://placehold.co/400x400/b45309/ffffff?text=Bawang+Gurih'
+        name: 'Kacang Asin Kemasan 500g',
+        price: 48000,
+        desc: 'Pilihan hemat untuk keluarga.',
+        img: 'Kacang 500gr.jpeg'
     },
     {
         id: 4,
-        name: 'Kacang Balado Pedas Manis 250g',
-        category: 'reguler',
-        price: 21000,
-        desc: 'Balutan bumbu balado khas rempah dengan pedas manis mantap.',
-        img: 'https://placehold.co/400x400/c2410c/ffffff?text=Balado+250g'
-    },
-    {
-        id: 5,
-        name: 'Kacang Asin Toples 1Kg (Edisi Premium)',
-        category: 'premium',
+        name: 'Kacang Asin Kemasan 1Kg',
         price: 90000,
-        desc: 'Edisi Premium dalam toples tebal kedap udara berisi kacang sangrai grade A+ pilihan dengan bumbu marinasi istimewa. Sempurna untuk hidangan keluarga & hampers.',
-        img: 'https://placehold.co/600x450/9a3412/ffffff?text=Toples+1Kg+Premium',
-        features: [
-            'Kacang Pilihan Grade A+ Super',
-            'Toples Tebal Kedap Udara Eksklusif',
-            'Termasuk Kartu Ucapan & Pita Bingkisan',
-            'Garansi Kerenyahan & Rasa Gurih 100%'
-        ]
+        desc: 'Kemasan pouch besar paling hemat untuk keluarga.',
+        img: 'Kacang 1kg Pouch.jpeg'
     }
 ];
 
@@ -63,79 +45,26 @@ const formatRupiah = (number) => {
 
 // Render Products
 const productGrid = document.getElementById('product-grid');
-const premiumSpotlight = document.getElementById('premium-spotlight');
-const regularHeading = document.getElementById('regular-heading');
 
 function renderProducts() {
-    const premiumItem = products.find(p => p.category === 'premium');
-    const regularItems = products.filter(p => p.category === 'reguler');
-
-    // 1 Spotlight Produk Premium
-    if (premiumSpotlight && premiumItem) {
-        premiumSpotlight.style.display = 'block';
-        premiumSpotlight.innerHTML = `
-                <div class="relative bg-secondary/60 border-2 border-primary/40 rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                    <div class="absolute -top-3.5 left-6 sm:left-8 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-extrabold uppercase tracking-wider py-1.5 px-4 rounded-full shadow-md flex items-center gap-1.5">
-                        <i class="fas fa-crown text-amber-200"></i>
-                        <span>Edisi Premium Eksklusif</span>
-                    </div>
-                    <div class="grid md:grid-cols-[1fr_1.3fr] gap-8 items-center mt-3">
-                        <div class="overflow-hidden rounded-2xl shadow-md group">
-                            <img src="${premiumItem.img}" alt="${premiumItem.name}" class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="flex flex-col justify-between">
-                            <div>
-                                <span class="text-xs font-bold text-accent tracking-wider uppercase mb-1 inline-block">Koleksi Spesial Toples</span>
-                                <h3 class="text-2xl sm:text-3xl font-bold text-stone-900 mb-3 leading-tight">${premiumItem.name}</h3>
-                                <p class="text-stone-600 text-sm mb-5 leading-relaxed">${premiumItem.desc}</p>
-                                <ul class="grid sm:grid-cols-2 gap-2.5 mb-6">
-                                    ${(premiumItem.features || []).map(f => `
-                                        <li class="flex items-center gap-2 text-xs md:text-sm text-stone-700 font-medium">
-                                            <i class="fas fa-check-circle text-green-500"></i>
-                                            <span>${f}</span>
-                                        </li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                            <div class="pt-4 border-t border-amber-200 flex flex-wrap items-center justify-between gap-4">
-                                <div>
-                                    <span class="text-xs text-stone-500 block font-medium">Harga Spesial</span>
-                                    <span class="text-3xl font-extrabold text-primary">${formatRupiah(premiumItem.price)}</span>
-                                </div>
-                                <button onclick="addToCart(${premiumItem.id})" class="px-6 py-3 bg-primary hover:bg-primaryHover text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-all flex items-center gap-2">
-                                    <i class="fas fa-shopping-cart text-sm"></i>
-                                    <span>+ Tambah ke Keranjang</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-    }
-
-    // 4 Produk Reguler
-    if (productGrid) {
-        productGrid.style.display = 'grid';
-        if (regularHeading) regularHeading.style.display = 'flex';
-
-        productGrid.innerHTML = regularItems.map(p => `
-            <div class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col">
-                <div class="relative overflow-hidden">
-                    <img src="${p.img}" alt="${p.name}" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="p-5 flex flex-col flex-1">
-                    <h3 class="text-lg font-bold text-stone-800 mb-1 leading-snug">${p.name}</h3>
-                    <p class="text-sm text-stone-500 mb-4 h-12 leading-relaxed line-clamp-2">${p.desc}</p>
-                    <div class="flex justify-between items-center mt-auto pt-2 border-t border-stone-100">
-                        <span class="text-primary font-bold text-lg">${formatRupiah(p.price)}</span>
-                        <button onclick="addToCart(${p.id})" class="w-10 h-10 rounded-full bg-secondary text-primary hover:bg-primary hover:text-white flex items-center justify-center transition-colors shadow-sm" aria-label="Tambah ${p.name}">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
+    if (!productGrid) return;
+    productGrid.innerHTML = products.map(p => `
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col">
+            <div class="relative overflow-hidden bg-stone-100">
+                <img src="${p.img}" alt="${p.name}" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-5 flex flex-col flex-1">
+                <h3 class="text-lg font-bold text-stone-800 mb-1 leading-snug">${p.name}</h3>
+                <p class="text-sm text-stone-500 mb-4 h-10 leading-relaxed">${p.desc}</p>
+                <div class="flex justify-between items-center mt-auto pt-2 border-t border-stone-100">
+                    <span class="text-primary font-bold text-lg">${formatRupiah(p.price)}</span>
+                    <button onclick="addToCart(${p.id})" class="w-10 h-10 rounded-full bg-secondary text-primary hover:bg-primary hover:text-white flex items-center justify-center transition-colors shadow-sm" aria-label="Tambah ${p.name}">
+                        <i class="fas fa-plus"></i>
+                    </button>
                 </div>
             </div>
-        `).join('');
-    }
+        </div>
+    `).join('');
 }
 
 // Cart Functions
