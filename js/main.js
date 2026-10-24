@@ -319,6 +319,59 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Smooth Scroll ke Anchor dengan Offset Navbar Dinamis
+function scrollToTarget(id) {
+    if (!id) return;
+    const cleanId = typeof id === 'string' ? id.replace(/^#/, '') : '';
+    if (!cleanId) return;
+
+    if (cleanId === 'beranda' || cleanId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+
+    const target = document.getElementById(cleanId);
+    if (!target) return;
+
+    const nav = document.getElementById('navbar');
+    const navH = nav ? nav.getBoundingClientRect().height : 64;
+    const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navH;
+
+    window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: 'smooth'
+    });
+}
+window.scrollToTarget = scrollToTarget;
+
+// Intercept semua klik pada link anchor internal <a href="#...">
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    const id = href.slice(1);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    e.preventDefault();
+    scrollToTarget(id);
+
+    if (typeof mobileMenuOpen !== 'undefined' && mobileMenuOpen) {
+        toggleMobileMenu();
+    }
+
+    history.pushState(null, '', '#' + id);
+});
+
+// Handle hash pada URL saat halaman pertama kali dimuat
+if (window.location.hash) {
+    setTimeout(() => {
+        scrollToTarget(window.location.hash.slice(1));
+    }, 150);
+}
+
 // Init on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();

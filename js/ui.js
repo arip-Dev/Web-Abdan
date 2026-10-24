@@ -7,72 +7,85 @@
  *                   toast.js (showToast)
  * ============================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   // ── Footer: tahun otomatis ─────────────────────────────────
-  $('#year').textContent = new Date().getFullYear();
+  $("#year").textContent = new Date().getFullYear();
 
   // ── Inisialisasi awal ──────────────────────────────────────
-  renderProducts('semua');
+  renderProducts("semua");
   updateCartUI();
   initCheckoutForm();
 
   // ── Filter Produk ──────────────────────────────────────────
-  document.getElementById('filterBar').addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-btn');
+  document.getElementById("filterBar").addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-btn");
     if (!btn) return;
-    document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
     renderProducts(btn.dataset.filter);
   });
 
   // ── Navbar: efek scroll (transparan → solid) ───────────────
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      navbar.classList.replace('bg-cream-blur', 'bg-cream-solid');
-      navbar.classList.add('shadow-sm');
-    } else {
-      navbar.classList.replace('bg-cream-solid', 'bg-cream-blur');
-      navbar.classList.remove('shadow-sm');
-    }
-  }, { passive: true });
+  const navbar = document.getElementById("navbar");
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 20) {
+        navbar.classList.replace("bg-cream-blur", "bg-cream-solid");
+        navbar.classList.add("shadow-sm");
+      } else {
+        navbar.classList.replace("bg-cream-solid", "bg-cream-blur");
+        navbar.classList.remove("shadow-sm");
+      }
+    },
+    { passive: true },
+  );
 
   // ── Mobile Menu ────────────────────────────────────────────
-  const toggle   = document.getElementById('menuToggle');
-  const menu     = document.getElementById('mobileMenu');
-  let   menuOpen = false;
+  const toggle = document.getElementById("menuToggle");
+  const menu = document.getElementById("mobileMenu");
+  let menuOpen = false;
 
-  toggle.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    menu.style.maxHeight = menuOpen ? menu.scrollHeight + 'px' : '0';
-    toggle.textContent   = menuOpen ? '✕' : '☰';
-  });
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      menuOpen = !menuOpen;
+      menu.style.maxHeight = menuOpen ? menu.scrollHeight + "px" : "0";
+      toggle.textContent = menuOpen ? "✕" : "☰";
+    });
+  }
 
   // ── Smooth Scroll ke Anchor ────────────────────────────────
   /**
    * Scroll ke elemen dengan id tertentu, dengan offset dinamis sebesar
    * tinggi navbar yang dibaca saat klik terjadi.
-   * @param {string} id - ID elemen target (tanpa '#')
+   * @param {string} id - ID elemen target (dengan atau tanpa '#')
    */
   function scrollToTarget(id) {
-    const target = document.getElementById(id);
-    if (!target) return;
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (!id) return;
+    const cleanId = typeof id === "string" ? id.replace(/^#/, "") : "";
+    if (!cleanId) return;
+
+    if (cleanId === "home" || cleanId === "beranda") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    const navH = document.getElementById('navbar').getBoundingClientRect().height;
-    const gap  = -10;
-    const top  = target.getBoundingClientRect().top + window.scrollY - navH - gap;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    const target = document.getElementById(cleanId);
+    if (!target) return;
+
+    const navbar = document.getElementById("navbar");
+    const navH = navbar ? navbar.getBoundingClientRect().height : 64;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   }
+  window.scrollToTarget = scrollToTarget;
 
   // Intercept semua klik <a href="#..."> di seluruh halaman
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     const link = e.target.closest('a[href^="#"]');
     if (!link) return;
-    const id = link.getAttribute('href').slice(1);
+    const id = link.getAttribute("href").slice(1);
     if (!id || !document.getElementById(id)) return;
 
     e.preventDefault();
@@ -80,13 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tutup menu mobile jika sedang terbuka
     if (menuOpen) {
-      menuOpen             = false;
-      menu.style.maxHeight = '0';
-      toggle.textContent   = '☰';
+      menuOpen = false;
+      menu.style.maxHeight = "0";
+      toggle.textContent = "☰";
     }
 
     // Perbarui URL hash tanpa memicu scroll bawaan browser
-    history.pushState(null, '', '#' + id);
+    history.pushState(null, "", "#" + id);
   });
 
   // Handle hash di URL saat halaman pertama kali dimuat
@@ -95,48 +108,54 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Keranjang Belanja ──────────────────────────────────────
-  document.getElementById('cartBtn')
-    .addEventListener('click', openCart);
+  document.getElementById("cartBtn").addEventListener("click", openCart);
 
-  document.getElementById('closeCart')
-    .addEventListener('click', closeCart);
+  document.getElementById("closeCart").addEventListener("click", closeCart);
 
-  document.getElementById('checkoutBtn')
-    .addEventListener('click', () => { closeCart(); openModal(); });
+  document.getElementById("checkoutBtn").addEventListener("click", () => {
+    closeCart();
+    openModal();
+  });
 
-  document.getElementById('clearCart')
-    .addEventListener('click', () => {
-      if (!cart.length) return;
-      cart = [];
-      save();
-      updateCartUI();
-      showToast('🗑️ Keranjang dikosongkan.', 'info');
-    });
+  document.getElementById("clearCart").addEventListener("click", () => {
+    if (!cart.length) return;
+    cart = [];
+    save();
+    updateCartUI();
+    showToast("🗑️ Keranjang dikosongkan.", "info");
+  });
 
   // ── Modal Checkout ─────────────────────────────────────────
-  document.getElementById('closeModal')
-    .addEventListener('click', closeModal);
+  document.getElementById("closeModal").addEventListener("click", closeModal);
 
-  document.getElementById('overlay')
-    .addEventListener('click', () => { closeCart(); closeModal(); });
+  document.getElementById("overlay").addEventListener("click", () => {
+    closeCart();
+    closeModal();
+  });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { closeCart(); closeModal(); }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeCart();
+      closeModal();
+    }
   });
 
   // ── Tombol Back to Top ─────────────────────────────────────
-  const btt = document.getElementById('backToTop');
+  const btt = document.getElementById("backToTop");
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 350) {
-      btt.classList.remove('opacity-0', 'invisible', 'translate-y-5');
-    } else {
-      btt.classList.add('opacity-0', 'invisible', 'translate-y-5');
-    }
-  }, { passive: true });
-
-  btt.addEventListener('click', () =>
-    window.scrollTo({ top: 0, behavior: 'smooth' }),
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 350) {
+        btt.classList.remove("opacity-0", "invisible", "translate-y-5");
+      } else {
+        btt.classList.add("opacity-0", "invisible", "translate-y-5");
+      }
+    },
+    { passive: true },
   );
 
+  btt.addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" }),
+  );
 });
